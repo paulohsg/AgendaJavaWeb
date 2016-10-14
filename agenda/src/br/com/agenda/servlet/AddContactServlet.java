@@ -2,6 +2,7 @@ package br.com.agenda.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,7 +46,8 @@ public class AddContactServlet extends HttpServlet {
 		contato.setEmail(email);
 		contato.setDataNascimento(dataNascimento);
 		// salva o contato
-		ContatoDao dao = new ContatoDao();
+		Connection connection = (Connection) request.getAttribute("conexao");
+		ContatoDao dao = new ContatoDao(connection);
 		dao.adiciona(contato);
 		// redireciona para o arquivo .jsp
 
